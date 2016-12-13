@@ -1,0 +1,22 @@
+extends layout
+
+block content
+  h1 File upload to aws s3
+  //, enctype="multipart/form-data"
+  form(action="/upload", method="post", enctype="multipart/form-data")
+   input(type="file", name="image", accept="image/*")
+   input(type='submit',value='Upload')
+
+  div(style="margin-top:100px;")
+  table(style="width:100%")
+    thead
+      tr: th Images
+    tbody
+      each img, i in images
+        tr
+          td 
+            form(action="/download", method="post")
+             input(type="hidden", value="#{img.diskname}", name="diskname")
+             input(type="submit", value="Download", name="file", style="cursor:pointer")
+          td
+            span #{img.name}   
